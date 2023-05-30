@@ -9,7 +9,7 @@ spec:
   source:
     git:
       # update when code is pushed to a new location
-      url: $GITREPO
+      url: https://github.com/RubenDillon/spring-sensors
       ref:
         branch: main
   env:
