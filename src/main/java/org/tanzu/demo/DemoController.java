@@ -45,12 +45,19 @@ public class DemoController {
         return new HashMap<>();
     }
 
-    private static final String REPLACEMENT_BANNER_TEXT="Tanzu Application Platform Demo";
+    @RequestMapping("/purge")
+    public @ResponseBody
+    Map<String, Object> purge() {
+        _sensorRepository.deleteAll();
+        return new HashMap<>();
+    }
+
+    private static final String REPLACEMENT_BANNER_TEXT="Spring Sensors";
 
     @RequestMapping("/refresh")
     public @ResponseBody SensorData refresh() {
-        SensorData result = new SensorData( _sensorRepository.findAll(), _webProperties.getTempHeader(),
-                _webProperties.getPressureHeader(), _webProperties.getBannerTextColor(), _webProperties.getBannerText());
+        SensorData result = new SensorData( _sensorRepository.findFirst10ByOrderByIdDesc(), _webProperties.getTempHeader(),
+                _webProperties.getPressureHeader(), _webProperties.getBannerTextColor(), REPLACEMENT_BANNER_TEXT);
         return result;
     }
 }
