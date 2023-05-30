@@ -20,6 +20,12 @@ spec:
       memory: 512Mi
     limits:
       memory: 512Mi
+  serviceClaims:
+    - name: db
+      ref:
+        apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+        kind: ClassClaim
+        name: sensors-mysql
   source:
     git:
       # update when code is pushed to a new location
